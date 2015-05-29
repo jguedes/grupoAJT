@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+@media all {
+	body {
+		background-color: black;
+		color: LightSkyBlue;
+		text-align: center;
+		min-width: 100%;
+		max-width: 100%;
+		font-size: 400%;
+	}
+	header {
+		border-bottom: solid 1px LightSkyBlue;
+		min-width: 100%;
+		max-width: 100%;
+	}
+	input {
+		min-width: 95%;
+		max-width: 95%;
+		font-size: 200%;
+	}
+}
+
+/* configuração para dispositivos com resolution */
+@media screen and (resolution) {
+	body {
+		/* background-color: red;*/
+		font-size: 12pt;
+	}
+	input {
+		min-width: 30%;
+		max-width: 30%;
+		font-size: 100%;
+	}
+}

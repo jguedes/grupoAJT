@@ -69,12 +69,13 @@ public class CamadaController extends HttpServlet {
 		String service = request.getParameter("service");
 
 		if (service.equalsIgnoreCase("iniciar")) {
-			
+
 			response.getWriter().write(camadaView.getTelaDeLogin());
 
 		} else if (service.equalsIgnoreCase("autenticarUser")) {
-			
-			System.out.println(request.getRemoteAddr()+": solicitando login.");
+
+			System.out
+					.println(request.getRemoteAddr() + ": solicitando login.");
 
 			String email = request.getParameter("email");
 
@@ -83,9 +84,10 @@ public class CamadaController extends HttpServlet {
 			Usuario usuario = camadaModel.getUsuario(email, senha);
 
 			if (usuario instanceof Nutricionista) {
-				
-				System.out.println(request.getRemoteAddr()+": login permitido (Nutricionista).");
-				
+
+				System.out.println(request.getRemoteAddr()
+						+ ": login permitido (Nutricionista).");
+
 				response.getWriter()
 						.write(camadaView
 								.getTelaPrincipalParaNutricionista(Nutricionista.class
@@ -93,8 +95,9 @@ public class CamadaController extends HttpServlet {
 
 			} else if (usuario instanceof ClienteDeNutricionista) {
 
-				System.out.println(request.getRemoteAddr()+": login permitido (Cliente de Nutricionista).");
-				
+				System.out.println(request.getRemoteAddr()
+						+ ": login permitido (Cliente de Nutricionista).");
+
 				response.getWriter()
 						.write(camadaView
 								.getTelaPrincipalParaClienteDeNutricionista(ClienteDeNutricionista.class
@@ -102,12 +105,21 @@ public class CamadaController extends HttpServlet {
 
 			} else {
 
-				System.out.println(request.getRemoteAddr()+": login não permitido.");
-				
+				System.out.println(request.getRemoteAddr()
+						+ ": login não permitido.");
+
 				response.getWriter().write(
 						camadaView.getTelaParaUsuarioNaoAutenticavel(usuario));
 
 			}
+
+		} else if (service.equalsIgnoreCase("armazenarfoto")) {
+
+			System.out.println(request.getAttribute("foto"));
+
+			String foto = request.getAttribute("foto").toString();
+
+			response.getWriter().write(foto);
 
 		}
 

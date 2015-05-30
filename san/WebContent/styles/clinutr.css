@@ -3,3 +3,10 @@
 #btnOpcoesDoAplicativo {
 	display: block;
 }
+
+#foto {
+	min-height: 10%;
+	max-height: 10%;
+	min-width: 10%;
+	max-width: 10%;
+}

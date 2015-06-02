@@ -6,6 +6,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="./js/jquery-1.11.2.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script type="text/javascript" src="./js/jquery.form.js"></script>
 <script type="text/javascript" src="./js/masterpage.js"></script>
 <link rel="stylesheet" type="text/css" href="./styles/masterpage.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

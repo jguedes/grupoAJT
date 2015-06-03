@@ -127,7 +127,7 @@ public class ManipuladorDeImagemEmDiretorio {
 	 *             dateengine/controllers/PhotoServlet.java<br>
 	 *             Acessado em: 2 jun.2015
 	 */
-	private static byte[] getDataFromInputStream(InputStream stream) {
+	public static byte[] getDataFromInputStream(InputStream stream) {
 
 		byte[] rawData = null;
 		int len;

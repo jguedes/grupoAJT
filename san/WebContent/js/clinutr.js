@@ -68,7 +68,7 @@ function showResponse(responseText, statusText, xhr, $form) {
 	// sucesso.');
 	// alert(responseText);
 	$("#foto").prop("src", responseText);
-	$('#foto').error(function() {
-		$(this).prop('src', responseText);
-	});
+//	$('#foto').error(function() {
+//		$(this).prop('src', responseText);
+//	});
 }

@@ -1,7 +1,11 @@
 package br.com.jguedes.grupoajt.san.camadacontroller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 import org.apache.tomcat.util.http.fileupload.FileItemStream;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import br.com.jguedes.grupoajt.san.camadamodel.CamadaModel;
@@ -60,7 +65,16 @@ public class CamadaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		String foto = request.getParameter("foto").toString();
+
+		System.out.println(foto);
+
+		response.setContentType("image/jpeg");
+		OutputStream out = response.getOutputStream();
+		IOUtils.copy(pegandoImagemNoDisco(foto), out);
+		out.flush();
+		out.close();
 	}
 
 	/**
@@ -176,22 +190,25 @@ public class CamadaController extends HttpServlet {
 
 					m.gravar();
 
-//					long i = System.currentTimeMillis() + 5000;
-//
-//					while (System.currentTimeMillis() < i)
-//						;
+					// long i = System.currentTimeMillis() + 5000;
+					//
+					// while (System.currentTimeMillis() < i)
+					// ;
 
-					response.setContentType("image/jpeg");
+					// response.setContentType("image/jpeg");
 
-					String[] split = request.getRequestURL().toString()
-							.split("CamadaController");
+					// String[] split = request.getRequestURL().toString()
+					// .split("CamadaController");
 
-					String src = split[0].concat("images").concat("/")
+					String queryString = "CamadaController?foto="
 							.concat(nomeDaImagem).concat(".").concat(extensao);
 
-					//System.out.println(src);
+					// String src = split[0].concat("images").concat("/")
+					// .concat(nomeDaImagem).concat(".").concat(extensao);
 
-					response.getWriter().write(src);
+					// System.out.println(src);
+
+					response.getWriter().write(queryString);
 
 					// ImageIO.write(m.getImagem(), extensao,
 					// response.getOutputStream());
@@ -226,6 +243,39 @@ public class CamadaController extends HttpServlet {
 			}
 
 		}
+
+	}
+
+	private static InputStream pegandoImagemNoDisco(String imagemName) {
+
+		try {
+			return new FileInputStream(
+					new File(
+							"/mnt/774ce448-05a2-4fc5-a56c-3261efee833f/Desenvolvimento/GitHub/Repositorios/grupoAJT/san/WebContent/images/"
+									.concat(imagemName)));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
+	private static byte[] _pegandoImagemNoDisco(String imagemName) {
+
+		File file = new File("WebContent/images/".concat(imagemName));
+
+		FileInputStream fis = null;
+
+		try {
+			fis = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ManipuladorDeImagemEmDiretorio.getDataFromInputStream(fis);
 
 	}
 }
